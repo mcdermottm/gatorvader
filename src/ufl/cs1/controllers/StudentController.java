@@ -16,19 +16,30 @@ public final class StudentController implements DefenderController
 	{
 		int[] actions = new int[Game.NUM_DEFENDER];
 		List<Defender> enemies = game.getDefenders();
-		//Tests
-		
-		//Chooses a random LEGAL action if required. Could be much simpler by simply returning
-		//any random number of all of the ghosts
-		for(int i = 0; i < actions.length; i++)
-		{
-			Defender defender = enemies.get(i);
-			List<Integer> possibleDirs = defender.getPossibleDirs();
-			if (possibleDirs.size() != 0)
-				actions[i]=possibleDirs.get(Game.rng.nextInt(possibleDirs.size()));
-			else
-				actions[i] = -1;
-		}
+
+        actions[0] = getBehavior1(enemies.get(0), game);
+        actions[1] = getBehavior2(enemies.get(1), game);
+        actions[2] = getBehavior3(enemies.get(2), game);
+        actions[3] = getBehavior4(enemies.get(3), game);
+
 		return actions;
 	}
+
+	public int getBehavior1(Defender defender, Game game){
+	    return 0;
+    }
+    public int getBehavior2(Defender defender, Game game){
+	    return 0;
+    }
+    public int getBehavior3(Defender defender, Game game){
+        return 0;
+    }
+    public int getBehavior4(Defender defender, Game game){
+        //Non-student code, just a placeholder for the fourth defender's behavior
+        List<Integer> possibleDirs = defender.getPossibleDirs();
+        if (possibleDirs.size() != 0)
+            return possibleDirs.get(Game.rng.nextInt(possibleDirs.size()));
+        else
+            return -1;
+    }
 }
