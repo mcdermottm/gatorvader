@@ -8,12 +8,20 @@ import java.util.List;
 
 public final class StudentController implements DefenderController
 {
+    public enum State{ATTACC, PROTECC}
+    Game previousGameState;
+    Game currentGameState;
+
 	public void init(Game game) { }
 
 	public void shutdown(Game game) { }
 
 	public int[] update(Game game,long timeDue)
 	{
+        this.currentGameState = game;
+        if (this.previousGameState == null) {
+            this.previousGameState = game;
+        }
 		int[] actions = new int[Game.NUM_DEFENDER];
 		List<Defender> enemies = game.getDefenders();
 
@@ -26,7 +34,13 @@ public final class StudentController implements DefenderController
 	}
 
 	public int getBehavior1(Defender defender, Game game){
-	    return 0;
+        List<Integer> possibleDirs = defender.getPossibleDirs();
+        System.out.println("Defender 1 " + possibleDirs);
+
+        if (possibleDirs.size() != 0)
+            return possibleDirs.get(0);
+        else
+            return -1;
     }
     public int getBehavior2(Defender defender, Game game){
 	    return 0;
