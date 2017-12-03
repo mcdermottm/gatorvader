@@ -34,8 +34,8 @@ public final class StudentController implements DefenderController
 
 	public int getBehavior1(Defender defender, Game game){
         Maze maze = game.getCurMaze();
-	    Node attacker = game.getAttacker().getLocation();
-        Attacker _attacker = game.getAttacker();
+	    Node attackerNode = game.getAttacker().getLocation();
+        Attacker attacker = game.getAttacker();
         List<Integer> directions = defender.getPossibleDirs();
         List<Node> locations = defender.getPossibleLocations();
         if (directions.size() > 1 && defender.getLairTime() <= 0){
@@ -43,9 +43,9 @@ public final class StudentController implements DefenderController
             int bestLength = 1000;
             for(int i=0; i<4; i++){
                 if(locations.get(i) != null){
-                    int possibleLength = locations.get(i).getPathDistance(attacker);
-                    Node closestPowerPill = _attacker.getTargetNode(maze.getPowerPillNodes(), true);
-                    if (_attacker.getLocation().getPathDistance(closestPowerPill) <= 10) {
+                    int possibleLength = locations.get(i).getPathDistance(attackerNode);
+                    Node closestPowerPill = attacker.getTargetNode(maze.getPowerPillNodes(), true);
+                    if (attacker.getLocation().getPathDistance(closestPowerPill) <= 10) {
                         if (possibleLength > bestLength) {
                             bestDirection = i;
                             bestLength = possibleLength;
@@ -71,8 +71,8 @@ public final class StudentController implements DefenderController
     }
     public int getBehavior2(Defender defender, Game game){
         Maze maze = game.getCurMaze();
-        Node attacker = game.getAttacker().getLocation();
-        Attacker _attacker = game.getAttacker();
+        Node attackerNode = game.getAttacker().getLocation();
+        Attacker attacker = game.getAttacker();
         List<Integer> directions = defender.getPossibleDirs();
         List<Node> locations = defender.getPossibleLocations();
         if (directions.size() > 1 && defender.getLairTime() <= 0){
@@ -80,9 +80,9 @@ public final class StudentController implements DefenderController
             int bestLength = 1000;
             for(int i=0; i<4; i++){
                 if(locations.get(i) != null){
-                    int possibleLength = locations.get(i).getPathDistance(attacker);
-                    Node closestPowerPill = _attacker.getTargetNode(maze.getPowerPillNodes(), true);
-                    if (_attacker.getLocation().getPathDistance(closestPowerPill) <= 10) {
+                    int possibleLength = locations.get(i).getPathDistance(attackerNode);
+                    Node closestPowerPill = attacker.getTargetNode(maze.getPowerPillNodes(), true);
+                    if (attacker.getLocation().getPathDistance(closestPowerPill) <= 10) {
                         if (possibleLength > bestLength) {
                             bestDirection = i;
                             bestLength = possibleLength;
@@ -108,8 +108,8 @@ public final class StudentController implements DefenderController
     }
     public int getBehavior3(Defender defender, Game game){
         Maze maze = game.getCurMaze();
-        Node attacker = game.getAttacker().getLocation();
-        Attacker _attacker = game.getAttacker();
+        Node attackerNode = game.getAttacker().getLocation();
+        Attacker attacker = game.getAttacker();
         List<Integer> directions = defender.getPossibleDirs();
         List<Node> locations = defender.getPossibleLocations();
         if (directions.size() > 1 && defender.getLairTime() <= 0){
@@ -117,9 +117,9 @@ public final class StudentController implements DefenderController
             int bestLength = 1000;
             for(int i=0; i<4; i++){
                 if(locations.get(i) != null){
-                    int possibleLength = locations.get(i).getPathDistance(attacker);
-                    Node closestPowerPill = _attacker.getTargetNode(maze.getPowerPillNodes(), true);
-                    if (_attacker.getLocation().getPathDistance(closestPowerPill) <= 10) {
+                    int possibleLength = locations.get(i).getPathDistance(attackerNode);
+                    Node closestPowerPill = attacker.getTargetNode(maze.getPowerPillNodes(), true);
+                    if (attacker.getLocation().getPathDistance(closestPowerPill) <= 10) {
                         if (possibleLength > bestLength) {
                             bestDirection = i;
                             bestLength = possibleLength;
@@ -144,7 +144,7 @@ public final class StudentController implements DefenderController
         return 1;
     }
     public int getBehavior4(Defender defender, Game game){
-        Node attacker = game.getAttacker().getLocation();
+        Node attackerNode = game.getAttacker().getLocation();
         List<Integer> directions = defender.getPossibleDirs();
         List<Node> locations = defender.getPossibleLocations();
         if (directions.size() > 1 && defender.getLairTime() <= 0){
@@ -152,7 +152,7 @@ public final class StudentController implements DefenderController
             int bestLength = 1000;
             for(int i=0; i<4; i++){
                 if(locations.get(i) != null){
-                    int possibleLength = locations.get(i).getPathDistance(attacker);
+                    int possibleLength = locations.get(i).getPathDistance(attackerNode);
                     if (possibleLength < bestLength) {
                         bestDirection = i;
                         bestLength = possibleLength;
