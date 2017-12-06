@@ -44,8 +44,11 @@ public final class StudentController implements DefenderController
             for(int i=0; i<4; i++){
                 if(locations.get(i) != null){
                     int possibleLength = locations.get(i).getPathDistance(attackerNode);
-                    Node closestPowerPill = attacker.getTargetNode(maze.getPowerPillNodes(), true);
-                    if (attacker.getLocation().getPathDistance(closestPowerPill) <= 10) {
+                    Node closestPowerPillToAttacker = attacker.getTargetNode(maze.getPowerPillNodes(), true);
+                    if (attacker.getLocation().getPathDistance(closestPowerPillToAttacker) <= 20) {
+                        if (i == 0) {
+                            bestLength = 0;
+                        }
                         if (possibleLength > bestLength) {
                             bestDirection = i;
                             bestLength = possibleLength;
@@ -82,7 +85,10 @@ public final class StudentController implements DefenderController
                 if(locations.get(i) != null){
                     int possibleLength = locations.get(i).getPathDistance(attackerNode);
                     Node closestPowerPill = attacker.getTargetNode(maze.getPowerPillNodes(), true);
-                    if (attacker.getLocation().getPathDistance(closestPowerPill) <= 10) {
+                    if (attacker.getLocation().getPathDistance(closestPowerPill) <= 20) {
+                        if (i == 0) {
+                            bestLength = 0;
+                        }
                         if (possibleLength > bestLength) {
                             bestDirection = i;
                             bestLength = possibleLength;
@@ -119,7 +125,10 @@ public final class StudentController implements DefenderController
                 if(locations.get(i) != null){
                     int possibleLength = locations.get(i).getPathDistance(attackerNode);
                     Node closestPowerPill = attacker.getTargetNode(maze.getPowerPillNodes(), true);
-                    if (attacker.getLocation().getPathDistance(closestPowerPill) <= 10) {
+                    if (attacker.getLocation().getPathDistance(closestPowerPill) <= 20) {
+                        if (i == 0) {
+                            bestLength = 0;
+                        }
                         if (possibleLength > bestLength) {
                             bestDirection = i;
                             bestLength = possibleLength;
