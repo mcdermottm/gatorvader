@@ -46,7 +46,16 @@ public final class StudentController implements DefenderController
                     int possibleLength = locations.get(i).getPathDistance(attackerNode);
                     Node closestPowerPill = attacker.getTargetNode(maze.getPowerPillNodes(), true);
                     boolean attackerCloseToPowerPill = (attacker.getLocation().getPathDistance(closestPowerPill) <= 20);
-                    if (attackerCloseToPowerPill || defender.isVulnerable()) {
+                    if(defender.getLocation().getPathDistance(attackerNode) > 127 &&
+                       defender.getVulnerableTime() < 70 &&
+                       defender.isVulnerable()) {
+                        //If the defender is vulnerable, but about to become invulnerable and far from the attacker,
+                        //  start attacking early
+                        if (possibleLength < bestLength) {
+                            bestDirection = i;
+                            bestLength = possibleLength;
+                        }
+                    } else if (attackerCloseToPowerPill || defender.isVulnerable()) {
                         //If the attacker is within 20 units of a power pill OR the defender is currently vulnerable,
                         //   run away instead of chasing
                         if (i == 0 && attackerCloseToPowerPill) {
@@ -56,8 +65,7 @@ public final class StudentController implements DefenderController
                             bestDirection = i;
                             bestLength = possibleLength;
                         }
-                    }
-                    else {
+                    } else {
                         //Default Chase Behavior
                         if (possibleLength < bestLength) {
                             bestDirection = i;
@@ -94,8 +102,7 @@ public final class StudentController implements DefenderController
                             bestDirection = i;
                             bestLength = possibleLength;
                         }
-                    }
-                    else {
+                    } else {
                         //Default Chase Behavior
                         if (possibleLength < bestLength) {
                             bestDirection = i;
@@ -132,8 +139,7 @@ public final class StudentController implements DefenderController
                             bestDirection = i;
                             bestLength = possibleLength;
                         }
-                    }
-                    else {
+                    } else {
                         //Default Chase Behavior
                         if (possibleLength < bestLength) {
                             bestDirection = i;
