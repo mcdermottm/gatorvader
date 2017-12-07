@@ -34,7 +34,7 @@ public final class StudentController implements DefenderController
 
 	public int getBehavior1(Defender defender, Game game){
         Maze maze = game.getCurMaze();
-	    Node attackerNode = game.getAttacker().getLocation();
+        Node attackerNode = game.getAttacker().getLocation();
         Attacker attacker = game.getAttacker();
         List<Integer> directions = defender.getPossibleDirs();
         List<Node> locations = defender.getPossibleLocations();
@@ -44,9 +44,12 @@ public final class StudentController implements DefenderController
             for(int i=0; i<4; i++){
                 if(locations.get(i) != null){
                     int possibleLength = locations.get(i).getPathDistance(attackerNode);
-                    Node closestPowerPillToAttacker = attacker.getTargetNode(maze.getPowerPillNodes(), true);
-                    if (attacker.getLocation().getPathDistance(closestPowerPillToAttacker) <= 20) {
-                        if (i == 0) {
+                    Node closestPowerPill = attacker.getTargetNode(maze.getPowerPillNodes(), true);
+                    boolean attackerCloseToPowerPill = (attacker.getLocation().getPathDistance(closestPowerPill) <= 20);
+                    if (attackerCloseToPowerPill || defender.isVulnerable()) {
+                        //If the attacker is within 20 units of a power pill OR the defender is currently vulnerable,
+                        //   run away instead of chasing
+                        if (i == 0 && attackerCloseToPowerPill) {
                             bestLength = 0;
                         }
                         if (possibleLength > bestLength) {
@@ -54,14 +57,9 @@ public final class StudentController implements DefenderController
                             bestLength = possibleLength;
                         }
                     }
-                    else if (!defender.isVulnerable()) {
+                    else {
+                        //Default Chase Behavior
                         if (possibleLength < bestLength) {
-                            bestDirection = i;
-                            bestLength = possibleLength;
-                        }
-                    }
-                    else if (defender.isVulnerable()) {
-                        if (possibleLength > bestLength) {
                             bestDirection = i;
                             bestLength = possibleLength;
                         }
@@ -85,8 +83,11 @@ public final class StudentController implements DefenderController
                 if(locations.get(i) != null){
                     int possibleLength = locations.get(i).getPathDistance(attackerNode);
                     Node closestPowerPill = attacker.getTargetNode(maze.getPowerPillNodes(), true);
-                    if (attacker.getLocation().getPathDistance(closestPowerPill) <= 20) {
-                        if (i == 0) {
+                    boolean attackerCloseToPowerPill = (attacker.getLocation().getPathDistance(closestPowerPill) <= 20);
+                    if (attackerCloseToPowerPill || defender.isVulnerable()) {
+                        //If the attacker is within 20 units of a power pill OR the defender is currently vulnerable,
+                        //   run away instead of chasing
+                        if (i == 0 && attackerCloseToPowerPill) {
                             bestLength = 0;
                         }
                         if (possibleLength > bestLength) {
@@ -94,14 +95,9 @@ public final class StudentController implements DefenderController
                             bestLength = possibleLength;
                         }
                     }
-                    else if (!defender.isVulnerable()) {
+                    else {
+                        //Default Chase Behavior
                         if (possibleLength < bestLength) {
-                            bestDirection = i;
-                            bestLength = possibleLength;
-                        }
-                    }
-                    else if (defender.isVulnerable()) {
-                        if (possibleLength > bestLength) {
                             bestDirection = i;
                             bestLength = possibleLength;
                         }
@@ -125,8 +121,11 @@ public final class StudentController implements DefenderController
                 if(locations.get(i) != null){
                     int possibleLength = locations.get(i).getPathDistance(attackerNode);
                     Node closestPowerPill = attacker.getTargetNode(maze.getPowerPillNodes(), true);
-                    if (attacker.getLocation().getPathDistance(closestPowerPill) <= 20) {
-                        if (i == 0) {
+                    boolean attackerCloseToPowerPill = (attacker.getLocation().getPathDistance(closestPowerPill) <= 20);
+                    if (attackerCloseToPowerPill || defender.isVulnerable()) {
+                        //If the attacker is within 20 units of a power pill OR the defender is currently vulnerable,
+                        //   run away instead of chasing
+                        if (i == 0 && attackerCloseToPowerPill) {
                             bestLength = 0;
                         }
                         if (possibleLength > bestLength) {
@@ -134,14 +133,9 @@ public final class StudentController implements DefenderController
                             bestLength = possibleLength;
                         }
                     }
-                    else if (!defender.isVulnerable()) {
+                    else {
+                        //Default Chase Behavior
                         if (possibleLength < bestLength) {
-                            bestDirection = i;
-                            bestLength = possibleLength;
-                        }
-                    }
-                    else if (defender.isVulnerable()) {
-                        if (possibleLength > bestLength) {
                             bestDirection = i;
                             bestLength = possibleLength;
                         }
